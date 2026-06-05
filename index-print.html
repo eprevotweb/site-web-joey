@@ -1,0 +1,644 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" type="image/png" href="https://jspeinture51.fr/wp-content/uploads/2023/10/cropped-Copie-de-Logo-Joey.png" />
+<title>JS Peinture — Peintre en bâtiment à Crugny | Reims, Marne &amp; Aisne</title>
+<meta name="description" content="Joey, artisan peintre en bâtiment à Crugny (51). 7 ans d'expérience, +200 chantiers." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/styles.css" />
+<style>
+  /* =====================================================
+     PRINT OVERRIDES — JS Peinture
+     Tall artisan website -> A4 portrait pages
+     ===================================================== */
+
+  /* Force colour rendering and remove interactivity baseline */
+  html, body {
+    background: #0C0B09 !important;
+    color: #F2EBDC !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Force visibility of everything (no scroll-reveal needed) */
+  .reveal { opacity: 1 !important; transform: none !important; transition: none !important; animation: none !important; }
+  .reveal-anim { opacity: 1 !important; transform: none !important; }
+  .split-words .w > span { transform: none !important; }
+  .split-words { opacity: 1 !important; }
+
+  /* Kill all animations */
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+
+  /* Hide interactive-only chrome */
+  .scroll-progress,
+  .cursor-dot,
+  .cursor-ring,
+  .lightbox,
+  .menu-toggle,
+  .mobile-panel,
+  .marquee,
+  .hero-v3-cta .pager,
+  .showreel-controls,
+  body::before { display: none !important; }
+
+  /* Header: keep visible but disable sticky */
+  .site-header {
+    position: static !important;
+    backdrop-filter: none !important;
+    background: var(--paper-pure) !important;
+    border-bottom: 1px solid var(--line) !important;
+  }
+  .nav-cta .btn--accent { background: var(--accent) !important; color: #fff !important; border-color: var(--accent) !important; }
+
+  /* ======= Hero ======= */
+  .hero-v3 {
+    min-height: auto !important;
+    padding-block: 0 !important;
+    page-break-after: always;
+    break-after: page;
+    overflow: hidden !important;
+    height: auto !important;
+  }
+  .hero-v3-bg { position: absolute !important; inset: 0 !important; z-index: 0 !important; }
+  .hero-v3-bg .slide { opacity: 0 !important; }
+  .hero-v3-bg .slide.is-active { opacity: 1 !important; }
+  .hero-v3-bg .slide img { animation: none !important; transform: none !important; width: 100% !important; height: 100% !important; object-fit: cover !important; }
+  .hero-v3 .container { padding-top: 60px !important; padding-bottom: 60px !important; }
+  .hero-v3 .meta-bar { margin-bottom: 32px !important; }
+  .hero-v3 h1 { font-size: 80px !important; line-height: 0.95 !important; }
+  .hero-v3 h1 .line .word { transform: none !important; display: inline-block !important; }
+  .hero-v3 .accent-dot { animation: none !important; }
+  .hero-v3-cta { margin-top: 24px !important; }
+  .hero-v3-foot { margin-top: 40px !important; padding-top: 24px !important; }
+  .hero-v3-foot .item .val { font-size: 18px !important; }
+
+  /* ======= Stats ======= */
+  .section-tight { padding-block: 24px !important; }
+  .stats { border-top: 1px solid var(--line) !important; border-bottom: 1px solid var(--line) !important; }
+  .stat { padding: 20px 16px !important; }
+  .stat .num { font-size: 42px !important; }
+  .stat .num small { font-size: 0.5em !important; }
+  .stat .lab { font-size: 10px !important; margin-top: 8px !important; }
+  [data-count] { /* make sure final value shows even without JS counter */ }
+
+  /* ======= Section / Story ======= */
+  .section, .story {
+    padding-block: 40px !important;
+    page-break-inside: avoid;
+    break-inside: avoid-page;
+  }
+  .section-head { margin-bottom: 24px !important; gap: 24px !important; }
+  .section-head h2, .story-row h3 { font-size: 36px !important; line-height: 1 !important; }
+  .lead { font-size: 14px !important; line-height: 1.5 !important; }
+
+  .story-row {
+    margin-bottom: 32px !important;
+    gap: 32px !important;
+    page-break-inside: avoid;
+    break-inside: avoid-page;
+    grid-template-columns: 1fr 1fr !important;
+  }
+  .story-img { aspect-ratio: 4/5 !important; max-height: 420px !important; }
+  .story-img img { animation: none !important; transform: none !important; }
+  .story-copy { padding-top: 0 !important; }
+  .story-copy .story-num { font-size: 64px !important; line-height: 0.9 !important; margin-bottom: 12px !important; }
+  .story-copy h3 { font-size: 28px !important; margin-bottom: 14px !important; }
+  .story-copy p { font-size: 13px !important; line-height: 1.5 !important; }
+  .story-copy .story-tags { margin-top: 14px !important; }
+  .story-copy .story-tags span { font-size: 9px !important; padding: 4px 8px !important; }
+
+  /* Page break before storytelling */
+  .story { page-break-before: page; break-before: page; }
+
+  /* ======= Finitions ======= */
+  .finitions {
+    padding-block: 40px !important;
+    page-break-before: page;
+    break-before: page;
+    page-break-inside: avoid;
+    break-inside: avoid-page;
+  }
+  .finitions-grid { gap: 32px !important; align-items: stretch !important; }
+  .fin-swatches { gap: 10px !important; }
+  .fin-swatch { aspect-ratio: 1 !important; padding: 14px !important; transform: none !important; }
+  .fin-swatch .fs-name { font-size: 18px !important; }
+  .fin-swatch .fs-num { font-size: 10px !important; }
+  .fin-detail { position: static !important; gap: 16px !important; }
+  .fin-detail .fd-title { font-size: 40px !important; line-height: 1 !important; }
+  .fin-detail .fd-desc { font-size: 13px !important; }
+  .fin-detail .fd-meta { padding-top: 16px !important; gap: 16px !important; }
+  .fin-detail .fd-meta .col span { font-size: 16px !important; }
+
+  /* ======= Showreel — turn horizontal rail into a static grid ======= */
+  .showreel {
+    padding-block: 40px !important;
+    page-break-before: page;
+    break-before: page;
+  }
+  .showreel-head { margin-bottom: 24px !important; }
+  .showreel-rail {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 14px !important;
+    overflow: visible !important;
+    padding-inline: var(--gutter) !important;
+    margin-inline: auto !important;
+    max-width: var(--maxw) !important;
+  }
+  .sr-card { flex: none !important; gap: 8px !important; }
+  .sr-card .sr-img { aspect-ratio: 4/5 !important; max-height: 280px !important; }
+  .sr-card .sr-img img { transform: none !important; filter: none !important; }
+  .sr-card .sr-meta .title { font-size: 14px !important; }
+  .sr-card .sr-meta .place { font-size: 9px !important; }
+  .sr-card .sr-img .badge { font-size: 9px !important; padding: 5px 10px !important; }
+
+  /* ======= Compare ======= */
+  .section.bg-grad-2 {
+    page-break-before: page;
+    break-before: page;
+    page-break-inside: avoid;
+    break-inside: avoid-page;
+  }
+  .compare {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px !important;
+    aspect-ratio: auto !important;
+    height: auto !important;
+    background: transparent !important;
+    border: 0 !important;
+  }
+  .compare > img { position: static !important; width: 100% !important; height: auto !important; aspect-ratio: 4/5 !important; object-fit: cover !important; max-height: 480px !important; }
+  .compare .after-wrap { position: static !important; width: 100% !important; border: 0 !important; overflow: visible !important; }
+  .compare .after-wrap img { width: 100% !important; height: auto !important; aspect-ratio: 4/5 !important; object-fit: cover !important; max-height: 480px !important; }
+  .compare .handle, .compare .knob { display: none !important; }
+  .compare .lbl { position: absolute !important; top: 12px !important; font-size: 9px !important; padding: 4px 8px !important; }
+
+  /* ======= Testimonials ======= */
+  .testimonials {
+    padding-block: 40px !important;
+    page-break-before: page;
+    break-before: page;
+    page-break-inside: avoid;
+    break-inside: avoid-page;
+  }
+  .testimonials::before { display: none !important; }
+  .t-grid { margin-top: 28px !important; }
+  .t-card { padding: 22px 18px !important; gap: 14px !important; }
+  .t-card blockquote { font-size: 14px !important; line-height: 1.4 !important; }
+  .t-card .who { font-size: 11px !important; padding-top: 14px !important; }
+  .t-card .stars { font-size: 12px !important; }
+
+  /* ======= FAQ ======= */
+  .section[data-screen-label*="FAQ"], section:has(> .container > .faq) {
+    padding-block: 40px !important;
+    page-break-before: page;
+    break-before: page;
+  }
+  .faq { gap: 32px !important; }
+  .faq-item summary { padding: 16px 0 !important; font-size: 14px !important; }
+  .faq-item summary .plus { display: none !important; }
+  .faq-item .answer {
+    display: block !important;
+    padding: 0 0 16px 0 !important;
+    font-size: 12px !important;
+    line-height: 1.5 !important;
+  }
+  .faq-item[open] .answer { display: block !important; }
+  details:not([open]) .answer { display: block !important; }
+
+  /* ======= Contact band ======= */
+  .contact-band {
+    padding-block: 40px !important;
+    page-break-before: page;
+    break-before: page;
+    page-break-inside: avoid;
+    break-inside: avoid-page;
+  }
+  .contact-grid { gap: 40px !important; align-items: start !important; }
+  .contact-info .row { padding-block: 12px !important; }
+  .contact-info .row span { font-size: 18px !important; }
+
+  /* ======= Footer ======= */
+  .site-footer {
+    padding: 40px 0 20px !important;
+    page-break-inside: avoid;
+    break-inside: avoid-page;
+  }
+  .footer-grid { gap: 24px !important; padding-bottom: 24px !important; }
+  .footer-col h5 { margin-bottom: 10px !important; }
+  .footer-col ul { gap: 6px !important; }
+  .footer-col li, .footer-col a { font-size: 12px !important; }
+  .footer-brand img { height: 40px !important; }
+
+  /* Buttons — flatten */
+  .btn { padding: 10px 16px !important; font-size: 11px !important; box-shadow: none !important; }
+  .btn .arrow { display: none !important; }
+  .btn--ghost { background: transparent !important; color: var(--ink) !important; border-color: var(--ink) !important; }
+
+  a { text-decoration: none !important; }
+
+  /* Headings: prevent orphaned headings at page bottom */
+  h1, h2, h3, h4 { page-break-after: avoid; break-after: avoid-page; }
+  img { page-break-inside: avoid; break-inside: avoid-page; }
+
+  /* ===== @page ===== */
+  @page {
+    size: A4 portrait;
+    margin: 12mm 10mm;
+  }
+
+  /* In screen preview, mimic the page width so the user can review */
+  @media screen {
+    body { background: #0C0B09; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <nav class="nav" aria-label="Principal">
+      <a class="brand" href="index.html">
+        <img class="brand-logo" src="https://jspeinture51.fr/wp-content/uploads/2023/10/cropped-Design-sans-titre-1.png" alt="JS Peinture" />
+        <span class="brand-mark">JS</span>
+        <span class="brand-name">peinture<b>.</b></span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Accueil</a></li>
+        <li><a href="a-propos.html">À propos</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="realisations.html">Réalisations</a></li>
+        <li><a href="blog.html">Journal</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-cta">
+        <span class="nav-phone"><span class="dot" aria-hidden="true"></span>06.45.26.38.50</span>
+        <a class="btn btn--accent" href="contact.html">Devis gratuit</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="hero-v3">
+  <div class="hero-v3-bg" aria-hidden="true">
+    <div class="slide is-active"><img src="https://jspeinture51.fr/wp-content/uploads/2023/10/accueil-photo-2-768x1024.jpg" alt="" /></div>
+  </div>
+  <div class="container">
+    <div class="meta-bar">
+      <span class="now">Disponible · prochain chantier juin 2026</span>
+      <span class="now" style="color: rgba(242,235,220,0.5);">Crugny · 51170 · Marne</span>
+    </div>
+    <h1>
+      <span class="line"><span class="word">Je rénove,</span></span>
+      <span class="line"><span class="word">j'embellis</span></span>
+      <span class="line"><span class="word"><span class="italic">votre espace</span></span></span>
+      <span class="line"><span class="word">de vie<span class="accent-dot" aria-hidden="true"></span></span></span>
+    </h1>
+    <div class="hero-v3-cta">
+      <span class="btn btn--accent">Demander un devis</span>
+      <span class="btn btn--ghost">Voir les chantiers</span>
+    </div>
+    <div class="hero-v3-foot">
+      <div class="item">
+        <div class="lbl">Spécialités</div>
+        <div class="val">Peinture, enduisage,<br /><span class="ital">revêtements muraux.</span></div>
+      </div>
+      <div class="item">
+        <div class="lbl">Zone</div>
+        <div class="val">Marne &amp; Aisne —<br /><span class="ital">7 communes desservies.</span></div>
+      </div>
+      <div class="item">
+        <div class="lbl">Joindre Joey</div>
+        <div class="val">06.45.26.38.50<br /><span class="ital">réponse sous 24h.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-tight bg-grad-1">
+  <div class="container">
+    <div class="stats">
+      <div class="stat"><div class="num">7</div><div class="lab">Années à votre service</div></div>
+      <div class="stat"><div class="num">200<small>+</small></div><div class="lab">Chantiers réalisés</div></div>
+      <div class="stat"><div class="num">7</div><div class="lab">Communes desservies</div></div>
+      <div class="stat"><div class="num">100<small>%</small></div><div class="lab">Devis gratuits</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="story">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Le savoir-faire</span>
+        <h2>Trois étapes, <br /><span class="italic">une exigence.</span></h2>
+      </div>
+      <p class="lead">Du mur abîmé au rendu impeccable. Chaque pièce passe par les mêmes trois temps — préparation, application, finition — sans raccourci, sans approximation.</p>
+    </div>
+
+    <div class="story-row">
+      <div class="story-img">
+        <span class="chapter">01 — Préparation</span>
+        <img src="https://jspeinture51.fr/wp-content/uploads/2023/10/accueil-photo-5-enduisage--scaled.jpg" alt="Préparation des supports" />
+      </div>
+      <div class="story-copy">
+        <span class="story-num">01</span>
+        <h3>Le mur, <span class="italic">d'abord.</span></h3>
+        <p>Avant la moindre couche, le mur est ausculté, dépoussiéré, rebouché, ratissé. C'est 60% du chantier — et c'est ce qu'on ne voit pas. Mais c'est ce qui fait que le résultat tient dans le temps.</p>
+        <div class="story-tags">
+          <span>Lessivage</span><span>Enduit de rebouchage</span><span>Ratissage</span><span>Ponçage fin</span><span>Sous-couche</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="story-row flip">
+      <div class="story-img">
+        <span class="chapter">02 — Application</span>
+        <img src="https://jspeinture51.fr/wp-content/uploads/2023/10/acuueil-photo-4-peinture-interieur--scaled.jpg" alt="Application" />
+      </div>
+      <div class="story-copy">
+        <span class="story-num">02</span>
+        <h3>La main, <span class="italic">ensuite.</span></h3>
+        <p>Deux couches minimum, croisées, contrôlées à la lumière rasante. Brosse fine pour les angles et les boiseries, rouleau pour les surfaces. Chaque type de support a sa peinture, chaque pièce a sa finition.</p>
+        <div class="story-tags">
+          <span>2 couches</span><span>Brosse + rouleau</span><span>Lumière rasante</span><span>Tollens · Seigneurie · Zolpan</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="story-row">
+      <div class="story-img">
+        <span class="chapter">03 — Finition</span>
+        <img src="https://jspeinture51.fr/wp-content/uploads/2023/10/Piece-9-apres-1-768x1024.jpg" alt="Pièce livrée" />
+      </div>
+      <div class="story-copy">
+        <span class="story-num">03</span>
+        <h3>Le détail, <span class="italic">enfin.</span></h3>
+        <p>Démasquage soigné, retouches, nettoyage complet de la pièce. On fait le tour ensemble pour valider. Si quelque chose vous chiffonne — même un détail — on reprend. La pièce est livrée prête à vivre.</p>
+        <div class="story-tags">
+          <span>Démasquage</span><span>Retouches</span><span>Ménage complet</span><span>Tour de réception</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="finitions">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Choisir sa finition</span>
+        <h2 style="color: var(--ink);">Quatre rendus, <br /><span class="italic" style="color: var(--accent-soft);">à essayer.</span></h2>
+      </div>
+      <p class="lead" style="color: rgba(242,235,220,0.7);">Mate pour la profondeur, velours pour la pièce de vie, satinée pour la pratique, laquée pour les boiseries.</p>
+    </div>
+
+    <div class="finitions-grid">
+      <div class="fin-swatches">
+        <div class="fin-swatch" style="--bg: #2c2620; --bg-2: #1c1814;">
+          <span class="fs-name">Mate</span><span class="fs-num">01</span>
+        </div>
+        <div class="fin-swatch" style="--bg: #3a302a; --bg-2: #25201c;">
+          <span class="fs-name">Velours</span><span class="fs-num">02</span>
+        </div>
+        <div class="fin-swatch" style="--bg: #4a3d33; --bg-2: #2d2620;">
+          <span class="fs-name">Satinée</span><span class="fs-num">03</span>
+        </div>
+        <div class="fin-swatch" style="--bg: #6b5440; --bg-2: #3b2e23;">
+          <span class="fs-name">Laquée</span><span class="fs-num">04</span>
+        </div>
+      </div>
+
+      <div class="fin-detail">
+        <div class="fd-title">Quatre finitions, <br /><span class="italic">au choix.</span></div>
+        <p class="fd-desc"><b style="color:var(--ink);">Mate</b> — profondeur veloutée, idéale chambres &amp; plafonds. <b style="color:var(--ink);">Velours</b> — équilibre profondeur/lavabilité, choix par défaut salons. <b style="color:var(--ink);">Satinée</b> — léger reflet, parfaite cuisines &amp; salles de bain. <b style="color:var(--ink);">Laquée</b> — finition très brillante, boiseries et portes.</p>
+        <div class="fd-meta">
+          <div class="col"><b>Conseil sur place</b><span>Gratuit</span></div>
+          <div class="col"><b>Marques pro</b><span>Tollens, Seigneurie, Zolpan</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="showreel">
+  <div class="showreel-head">
+    <div>
+      <span class="eyebrow">Chantiers récents</span>
+      <h2 style="margin-top: 18px;">Vu de <span class="italic">près</span>.</h2>
+    </div>
+  </div>
+  <div class="showreel-rail">
+    <article class="sr-card">
+      <div class="sr-img">
+        <span class="badge">Crugny · 2025</span>
+        <img src="https://jspeinture51.fr/wp-content/uploads/2023/10/Piece-9-apres-1-768x1024.jpg" alt="Salon" />
+      </div>
+      <div class="sr-meta"><span class="title">Salon — velours</span><span class="place">42 m²</span></div>
+    </article>
+    <article class="sr-card">
+      <div class="sr-img">
+        <span class="badge">Reims · 2025</span>
+        <img src="https://jspeinture51.fr/wp-content/uploads/2023/10/acuueil-photo-4-peinture-interieur--scaled.jpg" alt="Plafond" />
+      </div>
+      <div class="sr-meta"><span class="title">Plafond &amp; corniche</span><span class="place">28 m²</span></div>
+    </article>
+    <article class="sr-card">
+      <div class="sr-img">
+        <span class="badge">Fismes · 2025</span>
+        <img src="https://jspeinture51.fr/wp-content/uploads/2023/10/Porte-dentree-apres--768x1024.jpg" alt="Porte" />
+      </div>
+      <div class="sr-meta"><span class="title">Porte d'entrée bois</span><span class="place">extérieur</span></div>
+    </article>
+    <article class="sr-card">
+      <div class="sr-img">
+        <span class="badge">Muizon · 2024</span>
+        <img src="https://jspeinture51.fr/wp-content/uploads/2023/10/accueil-photo-6-revtement-muraux--scaled.jpg" alt="Papier peint" />
+      </div>
+      <div class="sr-meta"><span class="title">Papier peint salon</span><span class="place">22 m²</span></div>
+    </article>
+    <article class="sr-card">
+      <div class="sr-img">
+        <span class="badge">Jonchery · 2024</span>
+        <img src="https://jspeinture51.fr/wp-content/uploads/2023/10/accueil-photo-5-enduisage--scaled.jpg" alt="Enduisage" />
+      </div>
+      <div class="sr-meta"><span class="title">Enduisage complet</span><span class="place">maison</span></div>
+    </article>
+    <article class="sr-card">
+      <div class="sr-img">
+        <span class="badge">Reims · 2024</span>
+        <img src="https://jspeinture51.fr/wp-content/uploads/2023/10/Piece-2-768x1024.jpg" alt="Chambre" />
+      </div>
+      <div class="sr-meta"><span class="title">Chambre — reprise</span><span class="place">16 m²</span></div>
+    </article>
+  </div>
+</section>
+
+<section class="section bg-grad-2">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Preuve à l'appui</span>
+        <h2>La différence <br /><span class="italic">d'un coup d'œil.</span></h2>
+      </div>
+      <p class="lead">Un mur fatigué, un plafond marqué, une porte écaillée — et la pièce qui retrouve sa lumière.</p>
+    </div>
+
+    <div class="compare">
+      <img src="https://jspeinture51.fr/wp-content/uploads/2023/10/Piece-2-768x1024.jpg" alt="Avant" />
+      <div class="after-wrap">
+        <img src="https://jspeinture51.fr/wp-content/uploads/2023/10/Piece-9-apres-1-768x1024.jpg" alt="Après" />
+      </div>
+      <div class="lbl lbl-before" style="left: 12px;">Avant</div>
+      <div class="lbl lbl-after" style="right: 12px;">Après</div>
+    </div>
+  </div>
+</section>
+
+<section class="section testimonials">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow" style="color: var(--accent-soft);">Ils m'ont fait confiance</span>
+        <h2 style="color: var(--ink);">Des chantiers, <br /><span class="italic" style="color: var(--accent-soft);">des clients ravis.</span></h2>
+      </div>
+      <p class="lead" style="color: rgba(242,235,220,0.7);">Quelques mots de personnes que j'ai eu le plaisir d'accompagner.</p>
+    </div>
+
+    <div class="t-grid">
+      <article class="t-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>« Joey a entièrement repeint notre rez-de-chaussée. Travail impeccable, conseils précieux sur les couleurs, et chantier d'une propreté rare. On le recommande sans hésiter. »</blockquote>
+        <div class="who"><b>— Marie L.</b><span>Reims · Salon</span></div>
+      </article>
+      <article class="t-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>« Un vrai professionnel. Devis clair, délais respectés, et un sens du détail qui fait la différence. Il a su gérer un plafond compliqué qui me décourageait. »</blockquote>
+        <div class="who"><b>— Thomas D.</b><span>Fismes · Maison</span></div>
+      </article>
+      <article class="t-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>« Très bon contact dès le premier rendez-vous. Le résultat dépasse nos attentes, particulièrement sur la pose du papier peint panoramique. Merci&nbsp;! »</blockquote>
+        <div class="who"><b>— Aurélie M.</b><span>Muizon · Chambre</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="faq">
+      <div>
+        <span class="eyebrow">Questions fréquentes</span>
+        <h2 style="margin-top: 24px;">Tout ce qu'on me <br /><span class="italic">demande souvent.</span></h2>
+        <p class="lead" style="margin-top: 16px;">Vous ne trouvez pas votre réponse&nbsp;? Appelez-moi au 06.45.26.38.50.</p>
+      </div>
+
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary>Dans quelles villes intervenez-vous ?</summary>
+          <div class="answer">Je suis basé à Crugny (51170) et je me déplace dans toute la Marne et l'Aisne&nbsp;: Reims, Fismes, Jonchery-sur-Vesle, Muizon, Soissons, Braine et alentour.</div>
+        </details>
+        <details class="faq-item" open>
+          <summary>Le devis est-il gratuit ?</summary>
+          <div class="answer">Oui, toujours. Visite sur place, évaluation des surfaces, devis détaillé sous quelques jours. Sans engagement.</div>
+        </details>
+        <details class="faq-item" open>
+          <summary>Combien de temps dure un chantier ?</summary>
+          <div class="answer">Une pièce standard : 2 à 4 jours. Une maison complète : 2 à 4 semaines. Délai annoncé dans le devis et respecté.</div>
+        </details>
+        <details class="faq-item" open>
+          <summary>Travaillez-vous pour les professionnels ?</summary>
+          <div class="answer">Oui. Locaux commerciaux, bureaux, cabinets professionnels — souvent en horaires décalés.</div>
+        </details>
+        <details class="faq-item" open>
+          <summary>Fournissez-vous la peinture ?</summary>
+          <div class="answer">Oui — marques pro Tollens, Seigneurie, Zolpan… Ou je peux utiliser celles que vous avez choisies.</div>
+        </details>
+        <details class="faq-item" open>
+          <summary>Le chantier reste-t-il propre ?</summary>
+          <div class="answer">Protections au sol, masquage des plinthes et menuiseries, ménage de fin de poste chaque jour.</div>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact-band">
+  <div class="container">
+    <div class="contact-grid">
+      <div>
+        <span class="eyebrow">Parlons de votre projet</span>
+        <h2 style="margin-top: 24px;">Un mur, <br />une pièce, <br /><span class="italic">toute une maison&nbsp;?</span></h2>
+        <p class="lead" style="margin-top: 24px;">Décrivez-moi votre projet. Je vous rappelle sous 24h, je me déplace, je repars avec un devis clair, gratuit, sans engagement.</p>
+      </div>
+      <div class="contact-info">
+        <div class="row"><b>Téléphone</b><span>06.45.26.38.50</span></div>
+        <div class="row"><b>Email</b><span>jspeinture51@gmail.com</span></div>
+        <div class="row"><b>Horaires</b><span>Lun&nbsp;– Sam · 8h00 – 18h00</span></div>
+        <div class="row"><b>Adresse</b><span>Crugny, 51170 — Marne</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="footer-brand"><img src="https://jspeinture51.fr/wp-content/uploads/2023/10/cropped-Design-sans-titre-1.png" alt="JS Peinture" /><span class="footer-brand-text">JS peinture<b>.</b></span></div>
+        <p class="footer-blurb">Artisan peintre en bâtiment à Crugny. Marne et Aisne depuis 2019.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Navigation</h5>
+        <ul>
+          <li>Accueil</li><li>À propos</li><li>Services</li><li>Réalisations</li><li>Journal</li><li>Contact</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <ul>
+          <li>06.45.26.38.50</li><li>jspeinture51@gmail.com</li><li>Crugny, 51170</li><li>Lun – Sam · 8h–18h</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Zones d'intervention</h5>
+        <div class="zones">
+          <span>Crugny</span><span>Fismes</span><span>Jonchery</span><span>Muizon</span><span>Reims</span><span>Soissons</span><span>Braine</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bot">
+      <div>© 2026 JS Peinture — Tous droits réservés.</div>
+      <div>Peintre en bâtiment · Marne (51) &amp; Aisne (02)</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Wait for fonts + images, then trigger print
+  window.addEventListener('load', async () => {
+    try { if (document.fonts && document.fonts.ready) { await document.fonts.ready; } } catch (e) {}
+    const imgs = [...document.images];
+    await Promise.all(imgs.map(img => img.complete ? null : new Promise(res => {
+      img.addEventListener('load', res, { once: true });
+      img.addEventListener('error', res, { once: true });
+    })));
+    setTimeout(() => window.print(), 800);
+  });
+</script>
+</body>
+</html>

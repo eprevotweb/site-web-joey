@@ -1,0 +1,637 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Inspirations visuelles — JS Peinture</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500;600;700;800&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Instrument+Serif:ital@0;1&family=PP+Editorial+New:wght@400;500&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0F0E0C;
+    --paper: #F2EBDC;
+    --muted: #8E8377;
+    --accent: #D87543;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--paper);
+    font-family: 'Manrope', system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    padding: 64px clamp(20px, 4vw, 56px);
+  }
+  a { color: inherit; }
+  img { max-width: 100%; display: block; }
+
+  .moodboard-head {
+    max-width: 1200px;
+    margin: 0 auto 80px;
+    text-align: center;
+  }
+  .moodboard-head .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 24px;
+    display: inline-block;
+  }
+  .moodboard-head h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(40px, 6vw, 80px);
+    font-weight: 400;
+    line-height: 1;
+    margin-bottom: 24px;
+    letter-spacing: -0.01em;
+  }
+  .moodboard-head h1 .italic {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .moodboard-head p {
+    max-width: 60ch;
+    margin: 0 auto;
+    color: rgba(242,235,220,0.7);
+    font-size: 17px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 64px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .card {
+    border: 1px solid rgba(242,235,220,0.12);
+    background: #15130F;
+    overflow: hidden;
+  }
+
+  .card-head {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: baseline;
+    gap: 24px;
+    padding: 28px 40px;
+    border-bottom: 1px solid rgba(242,235,220,0.12);
+  }
+  .card-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+  }
+  .card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 500;
+  }
+  .card-title .italic { font-style: italic; color: var(--accent); }
+  .card-pick {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(242,235,220,0.5);
+    padding: 8px 14px;
+    border: 1px solid rgba(242,235,220,0.18);
+    cursor: pointer;
+    transition: all .3s;
+  }
+  .card-pick:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+  .card-body {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 0;
+  }
+  @media (max-width: 880px) {
+    .card-body { grid-template-columns: 1fr; }
+    .card-head { padding: 20px 24px; grid-template-columns: 1fr; gap: 8px; }
+  }
+
+  .mock {
+    padding: 40px;
+    position: relative;
+    min-height: 460px;
+    overflow: hidden;
+  }
+  .specs {
+    padding: 40px;
+    border-left: 1px solid rgba(242,235,220,0.12);
+    display: grid;
+    align-content: start;
+    gap: 28px;
+  }
+  @media (max-width: 880px) { .specs { border-left: 0; border-top: 1px solid rgba(242,235,220,0.12); } }
+
+  .specs-row b {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(242,235,220,0.45);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  .specs-row p {
+    color: rgba(242,235,220,0.8);
+    font-size: 14px;
+    line-height: 1.55;
+  }
+  .palette { display: flex; gap: 6px; }
+  .swatch {
+    width: 32px; height: 32px;
+    border-radius: 4px;
+    flex-shrink: 0;
+    border: 1px solid rgba(242,235,220,0.15);
+  }
+  .features {
+    display: grid;
+    gap: 6px;
+    font-size: 13px;
+  }
+  .features li { list-style: none; padding-left: 18px; position: relative; color: rgba(242,235,220,0.78); }
+  .features li::before { content: "—"; position: absolute; left: 0; color: var(--accent); }
+
+  /* ======================================
+     MOCK 01 — Editorial Atelier
+     ====================================== */
+  .mock-01 {
+    background: #F5EFE3;
+    color: #1A1714;
+  }
+  .mock-01 .nav {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    border-bottom: 1px solid #1A1714;
+    padding-bottom: 12px;
+    margin-bottom: 40px;
+  }
+  .mock-01 h2 {
+    font-family: 'Fraunces', 'Cormorant Garamond', serif;
+    font-size: 52px;
+    line-height: 0.95;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+  }
+  .mock-01 h2 .italic { font-style: italic; }
+  .mock-01 .meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid #1A1714;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .mock-01 .meta b { display: block; font-family: 'Fraunces', serif; font-size: 22px; font-style: italic; font-weight: 400; text-transform: none; letter-spacing: 0; margin-top: 4px; }
+
+  /* ======================================
+     MOCK 02 — Cinematic Brutalist
+     ====================================== */
+  .mock-02 {
+    background: #0A0A0A;
+    color: #fff;
+    position: relative;
+  }
+  .mock-02::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 80% 20%, rgba(216,117,67,0.18), transparent 50%),
+                radial-gradient(ellipse at 10% 100%, rgba(216,117,67,0.08), transparent 40%);
+    z-index: 0;
+  }
+  .mock-02 > * { position: relative; z-index: 1; }
+  .mock-02 .topbar {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+  }
+  .mock-02 .topbar .live { display: inline-flex; align-items: center; gap: 8px; color: var(--accent); }
+  .mock-02 .topbar .live::before { content: ""; width: 8px; height: 8px; background: #4ade80; border-radius: 50%; box-shadow: 0 0 12px #4ade80; }
+  .mock-02 h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 84px;
+    line-height: 0.88;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    margin-top: 60px;
+    text-transform: uppercase;
+  }
+  .mock-02 h2 small {
+    font-size: 0.22em;
+    display: block;
+    font-weight: 400;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.05em;
+    margin-top: 16px;
+    line-height: 1.4;
+    text-transform: none;
+    max-width: 30ch;
+  }
+  .mock-02 .grid-bot {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    margin-top: 48px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: rgba(255,255,255,0.7);
+  }
+  .mock-02 .grid-bot > div {
+    padding: 12px;
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+  .mock-02 .grid-bot b { display: block; color: #fff; font-size: 18px; font-family: 'Space Grotesk', sans-serif; font-weight: 700; margin-bottom: 4px; letter-spacing: -0.02em; }
+
+  /* ======================================
+     MOCK 03 — Soft Heritage Cream
+     ====================================== */
+  .mock-03 {
+    background: #E8DECC;
+    color: #2A2519;
+  }
+  .mock-03 .crest {
+    text-align: center;
+    margin-bottom: 32px;
+    border-bottom: 1px solid rgba(42,37,25,0.2);
+    padding-bottom: 16px;
+  }
+  .mock-03 .crest small {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: #B85C3E;
+    margin-bottom: 8px;
+  }
+  .mock-03 .crest .name {
+    font-family: 'Instrument Serif', 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-style: italic;
+  }
+  .mock-03 h2 {
+    font-family: 'Instrument Serif', 'Cormorant Garamond', serif;
+    font-size: 64px;
+    line-height: 1.02;
+    font-weight: 400;
+    letter-spacing: -0.015em;
+    text-align: center;
+  }
+  .mock-03 h2 em { color: #B85C3E; }
+  .mock-03 .lede {
+    font-family: 'Instrument Serif', serif;
+    font-size: 17px;
+    font-style: italic;
+    text-align: center;
+    margin-top: 24px;
+    color: rgba(42,37,25,0.7);
+    max-width: 36ch;
+    margin-inline: auto;
+  }
+  .mock-03 .deco {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 40px;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #B85C3E;
+  }
+  .mock-03 .deco span { display: inline-flex; align-items: center; gap: 8px; }
+  .mock-03 .deco span::before { content: "✦"; }
+
+  /* ======================================
+     MOCK 04 — Swiss Minimal Mono
+     ====================================== */
+  .mock-04 {
+    background: #FAFAFA;
+    color: #0A0A0A;
+    font-family: 'Inter', sans-serif;
+  }
+  .mock-04 .topgrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    border-top: 1px solid #0A0A0A;
+    border-bottom: 1px solid #0A0A0A;
+    padding: 8px 0;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .mock-04 .topgrid > div:not(:first-child) { padding-left: 8px; border-left: 1px solid rgba(10,10,10,0.2); }
+  .mock-04 h2 {
+    font-family: 'Inter', sans-serif;
+    font-size: 96px;
+    line-height: 0.9;
+    font-weight: 300;
+    letter-spacing: -0.05em;
+    margin-top: 56px;
+  }
+  .mock-04 h2 .reg { font-weight: 700; }
+  .mock-04 .bignum {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-top: 48px;
+    border-top: 1px solid #0A0A0A;
+    padding-top: 16px;
+  }
+  .mock-04 .bignum > div { border-right: 1px solid rgba(10,10,10,0.2); padding-right: 12px; }
+  .mock-04 .bignum > div:last-child { border-right: 0; }
+  .mock-04 .bignum b {
+    font-size: 40px;
+    font-weight: 300;
+    letter-spacing: -0.04em;
+    display: block;
+    line-height: 1;
+  }
+  .mock-04 .bignum span { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(10,10,10,0.55); }
+
+  /* Common tag */
+  .tag {
+    display: inline-block;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border: 1px solid currentColor;
+    margin-bottom: 24px;
+  }
+
+  /* CTA */
+  .footer-cta {
+    max-width: 800px;
+    margin: 120px auto 40px;
+    text-align: center;
+    padding: 56px 40px;
+    border: 1px solid rgba(242,235,220,0.18);
+  }
+  .footer-cta h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 400;
+    margin-bottom: 16px;
+  }
+  .footer-cta h3 .italic { font-style: italic; color: var(--accent); }
+  .footer-cta p { color: rgba(242,235,220,0.7); }
+  .footer-cta strong { color: var(--paper); }
+</style>
+</head>
+<body>
+
+<header class="moodboard-head">
+  <span class="eyebrow">Moodboard · 4 directions à valider</span>
+  <h1>Quatre regards <span class="italic">possibles</span><br />pour JS Peinture.</h1>
+  <p>Chaque direction garde la base actuelle (noir + crème + terracotta, photos en majesté) mais pousse l'identité dans une autre direction. Regardez les quatre, dites-moi laquelle vous touche le plus — je décline tout le site dessus.</p>
+</header>
+
+<div class="grid">
+
+  <!-- ====== 01 — Editorial Atelier ====== -->
+  <article class="card">
+    <header class="card-head">
+      <span class="card-num">— 01</span>
+      <span class="card-title">Atelier <span class="italic">éditorial</span> — cream, sérieux, premium.</span>
+      <span class="card-pick">Je choisis 01</span>
+    </header>
+    <div class="card-body">
+      <div class="mock mock-01">
+        <div class="nav">
+          <span>JS · Crugny</span>
+          <span>Accueil · Services · Réalisations · Contact</span>
+        </div>
+        <span class="tag">№ 01 — Hiver 2026</span>
+        <h2>Je rénove,<br />j'embellis<br />votre <span class="italic">espace.</span></h2>
+        <div class="meta">
+          <div>Lieu<br /><b>Crugny, 51170</b></div>
+          <div>Depuis<br /><b>2019</b></div>
+          <div>Chantiers<br /><b>+200</b></div>
+          <div>Joindre<br /><b>06.45.26.38.50</b></div>
+        </div>
+      </div>
+      <div class="specs">
+        <div class="specs-row">
+          <b>L'idée</b>
+          <p>Un fond crème chaud, une typographie de magazine d'art (Fraunces). On joue le côté <em>artisan-éditeur</em> — comme si chaque chantier était un numéro de revue. Très calme, très haut de gamme. Photos en majesté, blanc d'aération généreux.</p>
+        </div>
+        <div class="specs-row">
+          <b>Palette</b>
+          <div class="palette">
+            <div class="swatch" style="background:#F5EFE3"></div>
+            <div class="swatch" style="background:#1A1714"></div>
+            <div class="swatch" style="background:#B85C3E"></div>
+            <div class="swatch" style="background:#8B7D69"></div>
+            <div class="swatch" style="background:#E0D5BD"></div>
+          </div>
+        </div>
+        <div class="specs-row">
+          <b>Typographie</b>
+          <p style="font-family: 'Fraunces', serif; font-size: 28px; line-height: 1; letter-spacing: -0.01em;">Fraunces <em style="font-style:italic;">Display</em></p>
+          <p style="font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; margin-top: 6px;">+ Manrope (texte)</p>
+        </div>
+        <div class="specs-row">
+          <b>Marqueurs visuels</b>
+          <ul class="features">
+            <li>Numérotation type "№ 01 — Hiver 2026"</li>
+            <li>Filets séparateurs, méta en colonnes</li>
+            <li>Photos très grandes, légendes manuscrites</li>
+            <li>Italiques abondants en couleur</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- ====== 02 — Cinematic Brutalist ====== -->
+  <article class="card">
+    <header class="card-head">
+      <span class="card-num">— 02</span>
+      <span class="card-title">Cinématique <span class="italic">moderne</span> — noir, géant, neuf.</span>
+      <span class="card-pick">Je choisis 02</span>
+    </header>
+    <div class="card-body">
+      <div class="mock mock-02">
+        <div class="topbar">
+          <span>JS PEINTURE / 2026</span>
+          <span class="live">En activité · Crugny</span>
+        </div>
+        <h2>L'ART<br />DU&nbsp;MUR<br />REFAIT.
+          <small>Peinture, enduisage, revêtements — Marne &amp; Aisne. 200+ chantiers.</small>
+        </h2>
+        <div class="grid-bot">
+          <div><b>007</b>ANNÉES</div>
+          <div><b>200+</b>CHANTIERS</div>
+          <div><b>07</b>COMMUNES</div>
+        </div>
+      </div>
+      <div class="specs">
+        <div class="specs-row">
+          <b>L'idée</b>
+          <p>Tout en haute intensité. Typographie sans-serif géante en capitales (Space Grotesk), grille mono pour les chiffres, halos terracotta dans les coins, statut "en activité" pulsé en temps réel. Vibe agence créative, photos très traitées (grain + contraste).</p>
+        </div>
+        <div class="specs-row">
+          <b>Palette</b>
+          <div class="palette">
+            <div class="swatch" style="background:#0A0A0A"></div>
+            <div class="swatch" style="background:#fff"></div>
+            <div class="swatch" style="background:#D87543"></div>
+            <div class="swatch" style="background:#4ade80"></div>
+            <div class="swatch" style="background:#1F1F1F"></div>
+          </div>
+        </div>
+        <div class="specs-row">
+          <b>Typographie</b>
+          <p style="font-family: 'Space Grotesk', sans-serif; font-size: 28px; font-weight: 700; letter-spacing: -0.04em; line-height: 1;">SPACE GROTESK BOLD</p>
+          <p style="font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; margin-top: 6px;">+ JetBrains Mono (chiffres)</p>
+        </div>
+        <div class="specs-row">
+          <b>Marqueurs visuels</b>
+          <ul class="features">
+            <li>Indicateur "live" en temps réel</li>
+            <li>Chiffres en monospace, grille technique</li>
+            <li>Cursor follower très présent</li>
+            <li>Photos avec grain + traitement cinéma</li>
+            <li>Transitions ample, ascenseurs latéraux</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- ====== 03 — Soft Heritage ====== -->
+  <article class="card">
+    <header class="card-head">
+      <span class="card-num">— 03</span>
+      <span class="card-title">Patrimoine <span class="italic">artisan</span> — chaleureux, intemporel.</span>
+      <span class="card-pick">Je choisis 03</span>
+    </header>
+    <div class="card-body">
+      <div class="mock mock-03">
+        <div class="crest">
+          <small>Établi à Crugny — Marne</small>
+          <div class="name">JS Peinture</div>
+        </div>
+        <h2>Un mur,<br />une main, <em>une attention.</em></h2>
+        <p class="lede">L'art ancien de refaire les murs comme on prend soin d'une maison qu'on habite.</p>
+        <div class="deco">
+          <span>Peinture</span>
+          <span>Enduisage</span>
+          <span>Décoratif</span>
+        </div>
+      </div>
+      <div class="specs">
+        <div class="specs-row">
+          <b>L'idée</b>
+          <p>Un fond crème un peu plus saturé, presque "papier d'artisan". On joue la noblesse intemporelle — typographie serif italique de très haute classe (Instrument Serif), petites étoiles ✦ en accents, blason avec lieu et nom. Vibe Maison Lautner, Aesop, parfumerie ancienne.</p>
+        </div>
+        <div class="specs-row">
+          <b>Palette</b>
+          <div class="palette">
+            <div class="swatch" style="background:#E8DECC"></div>
+            <div class="swatch" style="background:#2A2519"></div>
+            <div class="swatch" style="background:#B85C3E"></div>
+            <div class="swatch" style="background:#D6C2A0"></div>
+            <div class="swatch" style="background:#5C4936"></div>
+          </div>
+        </div>
+        <div class="specs-row">
+          <b>Typographie</b>
+          <p style="font-family: 'Instrument Serif', serif; font-size: 30px; font-style: italic; letter-spacing: -0.01em;">Instrument <span style="font-style:normal;">Serif</span></p>
+          <p style="font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; margin-top: 6px;">+ Manrope (texte courant)</p>
+        </div>
+        <div class="specs-row">
+          <b>Marqueurs visuels</b>
+          <ul class="features">
+            <li>Blason / crest centré en haut</li>
+            <li>Symboles ornementaux (✦ ◆ ⸻)</li>
+            <li>Petits cadres de photos polaroid-like</li>
+            <li>Ton chaleureux, italiques omniprésents</li>
+            <li>Vintage subtil, jamais kitsch</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- ====== 04 — Swiss Minimal ====== -->
+  <article class="card">
+    <header class="card-head">
+      <span class="card-num">— 04</span>
+      <span class="card-title">Suisse <span class="italic">minimal</span> — strict, blanc, confiant.</span>
+      <span class="card-pick">Je choisis 04</span>
+    </header>
+    <div class="card-body">
+      <div class="mock mock-04">
+        <div class="topgrid">
+          <div>JS Peinture</div>
+          <div>Crugny / 51170</div>
+          <div>Marne &amp; Aisne</div>
+          <div>+33 6 45 26 38 50</div>
+        </div>
+        <h2>Peinture <span class="reg">précise.</span><br />Service <span class="reg">précis.</span></h2>
+        <div class="bignum">
+          <div><b>07</b><span>années d'expérience</span></div>
+          <div><b>200+</b><span>chantiers livrés</span></div>
+          <div><b>24h</b><span>réponse devis</span></div>
+        </div>
+      </div>
+      <div class="specs">
+        <div class="specs-row">
+          <b>L'idée</b>
+          <p>Tout l'inverse du baroque. Blanc, filets noirs, grille stricte, typographie sans-serif neutre (Inter / Helvetica). Les photos prennent toute la place justement parce que le décor est silencieux. Vibe musée d'art moderne, architecte.</p>
+        </div>
+        <div class="specs-row">
+          <b>Palette</b>
+          <div class="palette">
+            <div class="swatch" style="background:#FAFAFA"></div>
+            <div class="swatch" style="background:#0A0A0A"></div>
+            <div class="swatch" style="background:#D87543"></div>
+            <div class="swatch" style="background:#E5E5E5"></div>
+            <div class="swatch" style="background:#737373"></div>
+          </div>
+        </div>
+        <div class="specs-row">
+          <b>Typographie</b>
+          <p style="font-family: 'Inter', sans-serif; font-size: 28px; font-weight: 300; letter-spacing: -0.04em;">Inter <span style="font-weight:700;">Display</span></p>
+          <p style="font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; margin-top: 6px;">— Une seule famille, deux graisses</p>
+        </div>
+        <div class="specs-row">
+          <b>Marqueurs visuels</b>
+          <ul class="features">
+            <li>Grille très stricte, filets fins partout</li>
+            <li>Aucun italique, aucune fioriture</li>
+            <li>Chiffres énormes en thin (300)</li>
+            <li>Le terracotta ressort encore plus</li>
+            <li>Photos pleine largeur, traitées en clair</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </article>
+
+</div>
+
+<div class="footer-cta">
+  <h3>Une <span class="italic">préférence ?</span></h3>
+  <p>Dites-moi simplement <strong>« je prends 01 »</strong> (ou 02, 03, 04) — et si vous voulez mixer deux directions ou ajuster certains points. Je décline ensuite tout le site sur la direction choisie.</p>
+</div>
+
+</body>
+</html>

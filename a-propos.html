@@ -1,0 +1,977 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" type="image/png" href="https://jspeinture51.fr/wp-content/uploads/2023/10/cropped-Copie-de-Logo-Joey.png" />
+<link rel="apple-touch-icon" href="https://jspeinture51.fr/wp-content/uploads/2023/10/cropped-Copie-de-Logo-Joey.png" />
+<title>À propos — Joey, artisan peintre à Crugny | JS Peinture</title>
+<meta name="description" content="Joey, artisan peintre en bâtiment basé à Crugny (51). 7 ans d'expérience, plus de 200 chantiers menés dans la Marne et l'Aisne. Découvrez mon parcours, ma méthode, mes valeurs." />
+<meta name="keywords" content="artisan peintre Crugny, peintre Marne, peintre Aisne, peintre Reims, peintre bâtiment, Joey JS Peinture, peintre Fismes, peintre Soissons" />
+<link rel="canonical" href="https://jspeinture51.fr/a-propos/" />
+<meta property="og:title" content="À propos — JS Peinture" />
+<meta property="og:description" content="Joey, artisan peintre à Crugny. 7 ans, +200 chantiers. Marne &amp; Aisne." />
+<meta property="og:image" content="https://jspeinture51.fr/wp-content/uploads/2023/10/accueil-photo-3-mon-savoir-faire-.jpg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/styles.css" />
+
+<style>
+/* ===== Surcharges spécifiques À propos ===== */
+
+/* Hero : full-bleed split editorial */
+.ap-hero {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  min-height: 88vh;
+  border-bottom: 1px solid var(--line);
+  overflow: hidden;
+}
+.ap-hero-copy {
+  padding: clamp(64px, 8vw, 120px) clamp(24px, 5vw, 80px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 48px;
+  position: relative;
+  z-index: 2;
+}
+.ap-hero-copy::before {
+  content: "JS";
+  position: absolute;
+  top: -8%;
+  left: -4%;
+  font-family: var(--font-display);
+  font-size: clamp(280px, 36vw, 540px);
+  line-height: 0.8;
+  font-weight: 700;
+  color: var(--accent);
+  opacity: 0.06;
+  pointer-events: none;
+  letter-spacing: -0.06em;
+  z-index: -1;
+  text-transform: uppercase;
+}
+.ap-crumb {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(244,239,227,0.5);
+  display: flex;
+  gap: 12px;
+  font-weight: 500;
+}
+.ap-crumb a:hover { color: var(--accent); }
+.ap-crumb .sep { color: var(--line-strong); }
+
+.ap-hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(44px, 6vw, 96px);
+  line-height: 0.92;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+}
+.ap-hero h1 .accent-dot {
+  display: inline-block;
+  width: 14px; height: 14px;
+  background: var(--accent);
+  border-radius: 50%;
+  vertical-align: 0.15em;
+  margin-left: 6px;
+  box-shadow: 0 0 32px rgba(216,117,67,0.7);
+  animation: dot-pulse 2.4s ease-in-out infinite;
+}
+
+.ap-hero-lede {
+  font-size: clamp(17px, 1.4vw, 21px);
+  line-height: 1.55;
+  color: rgba(242,235,220,0.78);
+  max-width: 50ch;
+}
+.ap-hero-lede b { color: var(--ink); font-weight: 600; }
+
+.ap-hero-meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: clamp(16px, 2vw, 32px);
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+  margin-top: 0;
+}
+.ap-hero-meta .item .lbl {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(244,239,227,0.5);
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+.ap-hero-meta .item .val {
+  font-family: var(--font-display);
+  font-size: clamp(18px, 1.6vw, 24px);
+  color: var(--ink);
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+.ap-hero-meta .item .val .ital {
+  font-style: normal;
+  font-weight: 300;
+  color: var(--accent);
+  letter-spacing: -0.03em;
+}
+
+.ap-hero-img {
+  position: relative;
+  overflow: hidden;
+  background: var(--paper-2);
+  border-left: 1px solid var(--line);
+}
+.ap-hero-img img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  animation: ken-burns 22s ease-in-out infinite;
+}
+.ap-hero-img::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 50%, rgba(10,9,7,0.6) 100%);
+  pointer-events: none;
+}
+.ap-hero-img .badge {
+  position: absolute;
+  bottom: 32px;
+  left: 32px;
+  right: 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  color: #fff;
+  z-index: 2;
+}
+.ap-hero-img .badge .name {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 2vw, 32px);
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+.ap-hero-img .badge small {
+  display: block;
+  margin-top: 6px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  font-weight: 500;
+}
+.ap-hero-img .badge .role {
+  font-family: var(--font-mono);
+  font-style: normal;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-align: right;
+  color: var(--accent-soft);
+  font-weight: 500;
+}
+
+@media (max-width: 880px) {
+  .ap-hero { grid-template-columns: 1fr; min-height: auto; }
+  .ap-hero-img { aspect-ratio: 4/5; border-left: 0; border-top: 1px solid var(--line); }
+  .ap-hero-meta { grid-template-columns: 1fr 1fr; }
+}
+
+/* Bandeau chiffres */
+.ap-band-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-bottom: 1px solid var(--line);
+}
+.ap-band-stat {
+  padding: clamp(40px, 5vw, 64px) clamp(20px, 3vw, 40px);
+  border-right: 1px solid var(--line);
+  position: relative;
+  overflow: hidden;
+  transition: background .4s ease;
+}
+.ap-band-stat::before {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 0;
+  background: linear-gradient(180deg, transparent, rgba(216,117,67,0.06));
+  transition: height .5s ease;
+}
+.ap-band-stat:hover::before { height: 100%; }
+.ap-band-stat:last-child { border-right: 0; }
+.ap-band-stat .n {
+  font-family: var(--font-display);
+  font-size: clamp(48px, 5.4vw, 84px);
+  line-height: 0.9;
+  font-weight: 300;
+  letter-spacing: -0.05em;
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+.ap-band-stat .n small { font-size: 0.35em; color: var(--accent); font-weight: 700; }
+.ap-band-stat .lbl {
+  margin-top: 16px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(244,239,227,0.5);
+  font-weight: 500;
+}
+.ap-band-stat .desc {
+  margin-top: 14px;
+  font-size: 14px;
+  color: rgba(242,235,220,0.6);
+  line-height: 1.5;
+}
+@media (max-width: 880px) {
+  .ap-band-stats { grid-template-columns: 1fr 1fr; }
+  .ap-band-stat:nth-child(2) { border-right: 0; }
+  .ap-band-stat:nth-child(1), .ap-band-stat:nth-child(2) { border-bottom: 1px solid var(--line); }
+}
+
+/* Story split — photo + texte */
+.ap-story {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 0;
+  border-bottom: 1px solid var(--line);
+  align-items: stretch;
+}
+.ap-story-img {
+  position: relative;
+  background: var(--paper-2);
+  overflow: hidden;
+  border-right: 1px solid var(--line);
+  min-height: 600px;
+}
+.ap-story-img img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 1.2s ease;
+}
+.ap-story-img:hover img { transform: scale(1.05); }
+.ap-story-img::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(10,9,7,0.5) 100%);
+  pointer-events: none;
+}
+.ap-story-img .quote-mark {
+  position: absolute;
+  top: 32px;
+  left: 32px;
+  font-family: var(--font-display);
+  font-size: 160px;
+  line-height: 0.7;
+  color: var(--accent);
+  font-style: normal;
+  font-weight: 700;
+  opacity: 0.4;
+}
+
+.ap-story-copy {
+  padding: clamp(56px, 7vw, 100px) clamp(24px, 5vw, 80px);
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  justify-content: center;
+}
+.ap-story-copy h2 {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4vw, 52px);
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+}
+.ap-story-copy p {
+  font-size: 17px;
+  line-height: 1.65;
+  color: rgba(242,235,220,0.78);
+  max-width: 56ch;
+}
+.ap-story-copy p b { color: var(--ink); font-weight: 600; }
+.ap-story-copy .signature {
+  font-family: var(--font-display);
+  font-style: normal;
+  font-weight: 300;
+  font-size: 22px;
+  color: var(--accent);
+  margin-top: 16px;
+  letter-spacing: -0.02em;
+}
+@media (max-width: 880px) {
+  .ap-story { grid-template-columns: 1fr; }
+  .ap-story-img { min-height: 480px; border-right: 0; border-bottom: 1px solid var(--line); }
+}
+
+/* Manifesto — grille de valeurs */
+.ap-manifesto {
+  background: var(--paper-pure);
+  padding-block: clamp(80px, 10vw, 140px);
+  position: relative;
+  overflow: hidden;
+}
+.ap-manifesto::before {
+  content: "";
+  position: absolute;
+  top: -200px; right: -100px;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(216,117,67,0.12), transparent 60%);
+  pointer-events: none;
+}
+.ap-manifesto .container { position: relative; }
+.ap-mani-head {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: clamp(32px, 5vw, 80px);
+  align-items: end;
+  margin-bottom: clamp(48px, 6vw, 80px);
+}
+.ap-mani-head h2 {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 4.6vw, 64px);
+  line-height: 0.95;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+  text-transform: uppercase;
+}
+.ap-mani-head p {
+  color: rgba(242,235,220,0.72);
+  font-size: 17px;
+  line-height: 1.55;
+  max-width: 56ch;
+}
+.ap-mani-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border-top: 1px solid rgba(255,255,255,0.10);
+  border-bottom: 1px solid rgba(255,255,255,0.10);
+}
+.ap-mani-card {
+  padding: clamp(36px, 4vw, 56px) clamp(28px, 3vw, 44px);
+  border-right: 1px solid rgba(255,255,255,0.10);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-height: 380px;
+  transition: background .4s ease;
+}
+.ap-mani-card:last-child { border-right: 0; }
+.ap-mani-card:hover { background: rgba(216,117,67,0.05); }
+.ap-mani-card::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0;
+  width: 0; height: 2px;
+  background: var(--accent);
+  transition: width .5s cubic-bezier(.2,.7,.2,1);
+}
+.ap-mani-card:hover::before { width: 100%; }
+.ap-mani-card .num {
+  font-family: var(--font-display);
+  font-size: clamp(48px, 4.4vw, 72px);
+  line-height: 0.85;
+  color: var(--accent);
+  font-weight: 300;
+  letter-spacing: -0.05em;
+}
+.ap-mani-card h3 {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 2vw, 30px);
+  line-height: 1.05;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  text-transform: uppercase;
+}
+.ap-mani-card h3 .italic { font-style: normal; color: var(--accent); font-weight: 300; letter-spacing: -0.04em; }
+.ap-mani-card p {
+  color: rgba(242,235,220,0.72);
+  font-size: 15px;
+  line-height: 1.6;
+  margin: 0;
+  margin-top: auto;
+}
+.ap-mani-card .tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  padding: 5px 10px;
+  border: 1px solid var(--accent);
+  align-self: flex-start;
+  font-weight: 500;
+}
+@media (max-width: 880px) {
+  .ap-mani-head { grid-template-columns: 1fr; }
+  .ap-mani-grid { grid-template-columns: 1fr; }
+  .ap-mani-card { border-right: 0; border-bottom: 1px solid rgba(255,255,255,0.10); min-height: auto; }
+  .ap-mani-card:last-child { border-bottom: 0; }
+}
+
+/* Process — timeline horizontale */
+.ap-process {
+  padding-block: clamp(80px, 10vw, 140px);
+  border-bottom: 1px solid var(--line);
+}
+.ap-process-head {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: clamp(32px, 5vw, 80px);
+  align-items: end;
+  margin-bottom: clamp(48px, 6vw, 80px);
+}
+.ap-process-head h2 {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 4.6vw, 64px);
+  line-height: 0.95;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+}
+.ap-process-head p {
+  color: rgba(242,235,220,0.72);
+  font-size: 17px;
+  max-width: 56ch;
+}
+.ap-process-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  position: relative;
+  border-top: 1px solid var(--line);
+}
+.ap-process-grid::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 0;
+  height: 2px;
+  width: 0;
+  background: var(--accent);
+  animation: process-fill 2.4s cubic-bezier(.2,.7,.2,1) forwards;
+  animation-play-state: paused;
+}
+.ap-process-grid.in-view::before { animation-play-state: running; }
+@keyframes process-fill { to { width: 100%; } }
+
+.ap-process-step {
+  padding: clamp(28px, 3vw, 40px) clamp(20px, 2.5vw, 32px) clamp(28px, 3vw, 40px) 0;
+  border-right: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  position: relative;
+}
+.ap-process-step:last-child { border-right: 0; }
+.ap-process-step::before {
+  content: "";
+  position: absolute;
+  top: -7px;
+  left: 0;
+  width: 12px; height: 12px;
+  background: var(--paper);
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  transition: background .3s ease;
+}
+.ap-process-step:hover::before { background: var(--accent); }
+.ap-process-step .step-tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 500;
+}
+.ap-process-step .step-n {
+  font-family: var(--font-display);
+  font-size: clamp(48px, 5.4vw, 88px);
+  line-height: 0.85;
+  color: var(--ink);
+  font-weight: 300;
+  font-style: normal;
+  letter-spacing: -0.05em;
+}
+.ap-process-step h3 {
+  font-family: var(--font-display);
+  font-size: clamp(18px, 1.5vw, 22px);
+  line-height: 1.1;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+.ap-process-step p {
+  color: rgba(242,235,220,0.7);
+  font-size: 14px;
+  line-height: 1.55;
+  margin: 0;
+}
+@media (max-width: 880px) {
+  .ap-process-head { grid-template-columns: 1fr; }
+  .ap-process-grid { grid-template-columns: 1fr; }
+  .ap-process-step { border-right: 0; border-bottom: 1px solid var(--line); padding-right: 0; }
+  .ap-process-step:last-child { border-bottom: 0; }
+}
+
+/* Citation pleine largeur */
+.ap-quote {
+  padding-block: clamp(80px, 10vw, 140px);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--line);
+}
+.ap-quote::before {
+  content: "\201C";
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-display);
+  font-size: clamp(280px, 32vw, 480px);
+  line-height: 1;
+  color: var(--accent);
+  opacity: 0.08;
+  font-style: normal;
+  font-weight: 700;
+  pointer-events: none;
+}
+.ap-quote .container { position: relative; max-width: 1000px; }
+.ap-quote blockquote {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 52px);
+  line-height: 1.05;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  margin: 32px auto;
+  max-width: 22ch;
+  color: var(--ink);
+  text-transform: uppercase;
+}
+.ap-quote blockquote .italic { color: var(--accent); font-weight: 300; font-style: normal; letter-spacing: -0.04em; }
+.ap-quote blockquote .muted { color: rgba(242,235,220,0.45); }
+.ap-quote .sig {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(244,239,227,0.5);
+  margin-top: 24px;
+  font-weight: 500;
+}
+
+/* Marques */
+.ap-brands {
+  padding-block: clamp(64px, 8vw, 100px);
+  border-bottom: 1px solid var(--line);
+}
+.ap-brands-head {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto clamp(40px, 5vw, 64px);
+}
+.ap-brands-head h2 {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4vw, 52px);
+  line-height: 0.95;
+  font-weight: 700;
+  margin-top: 16px;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+}
+.ap-brands-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.ap-brands-pill {
+  font-family: var(--font-display);
+  font-size: clamp(16px, 1.4vw, 20px);
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  padding: 12px 22px;
+  border: 1px solid var(--line-strong);
+  border-radius: 0;
+  color: var(--ink);
+  transition: all .35s ease;
+  cursor: default;
+  text-transform: uppercase;
+}
+.ap-brands-pill:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px -10px rgba(224,122,69,0.4);
+}
+.ap-brands-foot {
+  text-align: center;
+  margin-top: 40px;
+  color: rgba(242,235,220,0.6);
+  font-size: 15px;
+  max-width: 60ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <nav class="nav" aria-label="Principal">
+      <a class="brand" href="index.html"><img class="brand-logo" src="assets/logo/js-logo.png" alt="JS Peinture" /><span class="brand-mark">JS</span><span class="brand-name">peinture<b>.</b></span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="a-propos.html" class="active">À propos</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="realisations.html">Réalisations</a></li>
+        <li><a href="blog.html">Journal</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a class="nav-phone" href="tel:+33645263850"><span class="dot"></span>06.45.26.38.50</a>
+        <a class="btn btn--accent" href="contact.html">Devis gratuit <span class="arrow">→</span></a>
+        <button class="menu-toggle" aria-label="Menu" aria-expanded="false"><span class="menu-label">Menu</span> <span class="bars" aria-hidden="true"></span></button>
+      </div>
+    </nav>
+  </div>
+  <div class="mobile-panel">
+    <ul>
+      <li><a href="index.html" data-n="01">Accueil</a></li>
+      <li><a href="a-propos.html" data-n="02">À propos</a></li>
+      <li><a href="services.html" data-n="03">Services</a></li>
+      <li><a href="realisations.html" data-n="04">Réalisations</a></li>
+      <li><a href="blog.html" data-n="05">Journal</a></li>
+      <li><a href="contact.html" data-n="06">Contact</a></li>
+    </ul>
+    <a class="mp-cta" href="contact.html">Devis gratuit</a>
+    <a class="italic" href="tel:+33645263850">06.45.26.38.50</a>
+  </div>
+</header>
+
+<!-- Barre d'action mobile (pouce) -->
+<nav class="mobile-actionbar" aria-label="Actions rapides">
+  <a class="mab-item mab-call" href="tel:+33645263850" aria-label="Appeler">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h3l2 5-2 1.5a12 12 0 0 0 5.5 5.5L20 13l1 5v3a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Appeler
+  </a>
+  <a class="mab-item mab-devis" href="contact.html" aria-label="Demander un devis">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h7l5 5v13H7zM14 3v5h5M9.5 13h6M9.5 17h6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Devis
+  </a>
+</nav>
+
+
+<main id="main">
+
+<!-- ============ HERO ============ -->
+<section class="ap-hero" data-screen-label="01 Hero">
+  <div class="ap-hero-copy">
+    <nav class="ap-crumb">
+      <a href="index.html">Accueil</a>
+      <span class="sep">/</span>
+      <span>À propos</span>
+    </nav>
+
+    <div>
+      <h1>Le métier,<br />la main,<br /><span class="italic">la couleur</span><span class="accent-dot" aria-hidden="true"></span></h1>
+      <p class="ap-hero-lede" style="margin-top: 32px;">Je m'appelle <b>Joey</b>. Depuis sept ans, je peins, j'enduis, je ratisse et j'habille les murs de la Marne et de l'Aisne. JS Peinture, c'est une seule paire de mains, un seul interlocuteur — et l'envie de bien faire, toujours.</p>
+    </div>
+
+    <div class="ap-hero-meta">
+      <div class="item">
+        <div class="lbl">Atelier</div>
+        <div class="val">Crugny<br /><span class="ital">51170</span></div>
+      </div>
+      <div class="item">
+        <div class="lbl">Statut</div>
+        <div class="val">Artisan,<br /><span class="ital">à mon compte</span></div>
+      </div>
+      <div class="item">
+        <div class="lbl">Depuis</div>
+        <div class="val">2019<br /><span class="ital">— 7 ans</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ap-hero-img">
+    <img src="assets/photos/realisations/r06.jpg" alt="Joey, artisan peintre à Crugny" />
+    <div class="badge">
+      <div>
+        <div class="name">Joey</div>
+        <small>Artisan peintre · Crugny</small>
+      </div>
+      <div class="role">depuis<br />2019</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BAND CHIFFRES ============ -->
+<section data-screen-label="02 Chiffres">
+  <div class="ap-band-stats">
+    <div class="ap-band-stat">
+      <div class="n"><span data-count="7">7</span></div>
+      <div class="lbl">Années d'expérience</div>
+      <div class="desc">Apprentissage chantier, puis à mon compte depuis 2019.</div>
+    </div>
+    <div class="ap-band-stat">
+      <div class="n"><span data-count="200">200</span><small>+</small></div>
+      <div class="lbl">Chantiers livrés</div>
+      <div class="desc">Particuliers, professionnels, du studio à la maison de famille.</div>
+    </div>
+    <div class="ap-band-stat">
+      <div class="n"><span data-count="7">7</span></div>
+      <div class="lbl">Communes desservies</div>
+      <div class="desc">De Crugny à Reims, Fismes, Muizon, Soissons, Braine et alentour.</div>
+    </div>
+    <div class="ap-band-stat">
+      <div class="n">24h</div>
+      <div class="lbl">Réponse devis</div>
+      <div class="desc">Garantie sous 24h ouvrées. Visite gratuite, sans engagement.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STORY ============ -->
+<section class="ap-story" data-screen-label="03 Parcours">
+  <div class="ap-story-img">
+    <img src="assets/photos/realisations/r18.jpg" alt="Détail de finition par JS Peinture" />
+    <span class="quote-mark">“</span>
+  </div>
+
+  <div class="ap-story-copy">
+    <span class="eyebrow">Le parcours</span>
+    <h2>D'apprenti,<br /><span class="italic">à son compte</span>.</h2>
+    <p>J'ai appris la peinture en bâtiment <b>sur les chantiers</b>, aux côtés d'artisans qui m'ont transmis ce qu'on ne trouve pas dans les manuels&nbsp;: le coup d'œil, la patience, le respect du travail bien fait.</p>
+    <p>En 2019, j'ai créé <b>JS Peinture</b> pour appliquer cette exigence à mon rythme — celui d'un artisan, pas d'une chaîne. Aujourd'hui, c'est plus de 200 chantiers à mon actif, dans toute la Marne et l'Aisne.</p>
+    <p>Des grands salons aux petites chambres d'enfants, des façades de commerce aux maisons de famille — chaque projet est traité comme s'il était unique. <span class="italic">Parce qu'il l'est.</span></p>
+    <div class="signature">— Joey</div>
+    <div style="display:flex; gap:14px; flex-wrap:wrap; margin-top: 16px;">
+      <a class="btn btn--accent" href="contact.html">Discuter d'un projet <span class="arrow">→</span></a>
+      <a class="btn btn--ghost" href="realisations.html">Voir mes réalisations</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MARQUEE ============ -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Crugny 51170 <i>◆</i> Marne &amp; Aisne <i>◆</i> Devis gratuit <i>◆</i> Assurance décennale <i>◆</i> Auto-entrepreneur déclaré <i>◆</i> 7 ans d'expérience <i>◆</i> 200+ chantiers <i>◆</i></span>
+  </div>
+</div>
+
+<!-- ============ MANIFESTO ============ -->
+<section class="ap-manifesto" data-screen-label="04 Valeurs">
+  <div class="container">
+    <div class="ap-mani-head">
+      <div>
+        <span class="eyebrow" style="color: var(--accent-soft);">Manifesto</span>
+        <h2 style="margin-top: 16px;">Trois principes,<br /><span class="italic" style="color: var(--accent-soft);">non négociables</span>.</h2>
+      </div>
+      <p>Ce que vous trouverez chez moi — et ce que vous ne trouverez pas. Pas de jargon, pas de mauvaise surprise, pas de "on verra plus tard".</p>
+    </div>
+
+    <div class="ap-mani-grid">
+      <article class="ap-mani-card">
+        <div class="num">01</div>
+        <span class="tag">Engagement</span>
+        <h3>Le devis<br /><span class="italic">est la parole.</span></h3>
+        <p>Le prix annoncé est le prix payé. Si un imprévu apparaît — ça arrive — on en parle <em>avant</em> que je continue. Pas de facture surprise à la livraison.</p>
+      </article>
+      <article class="ap-mani-card">
+        <div class="num">02</div>
+        <span class="tag">Méthode</span>
+        <h3>La préparation<br /><span class="italic">est reine.</span></h3>
+        <p>90% d'un beau mur, c'est ce qui se passe avant la première couche. Enduits, ponçage, masquage&nbsp;: je ne fais jamais l'impasse, même quand le client ne le verra pas.</p>
+      </article>
+      <article class="ap-mani-card">
+        <div class="num">03</div>
+        <span class="tag">Proximité</span>
+        <h3>Vous parlez<br /><span class="italic">à l'artisan.</span></h3>
+        <p>Du premier appel à la dernière retouche, c'est moi. Pas d'équipe qui change, pas de sous-traitance, pas de commercial entre nous. Une seule paire de mains, un seul nom.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROCESS ============ -->
+<section class="ap-process" data-screen-label="05 Méthode">
+  <div class="container">
+    <div class="ap-process-head">
+      <div>
+        <span class="eyebrow">Ma méthode</span>
+        <h2 style="margin-top: 16px;">Comment ça<br /><span class="italic">se passe</span>.</h2>
+      </div>
+      <p>Quatre temps simples, du premier appel aux dernières retouches. Sans surprise, avec un devis clair en début et un contrôle qualité en fin de chantier.</p>
+    </div>
+
+    <div class="ap-process-grid">
+      <div class="ap-process-step">
+        <span class="step-tag">Jour 1 — gratuit</span>
+        <div class="step-n">01</div>
+        <h3>Visite &amp; conseil</h3>
+        <p>Je viens sur place, je prends les mesures, on échange sur vos envies. Conseils couleurs et finitions, idées d'amélioration s'il y en a — sans jargon.</p>
+      </div>
+      <div class="ap-process-step">
+        <span class="step-tag">Sous 48–72h</span>
+        <div class="step-n">02</div>
+        <h3>Devis détaillé</h3>
+        <p>Je vous envoie un devis <em>ligne par ligne</em>. Surfaces, produits, mises en œuvre, délais — tout est écrit. Sans engagement, sans pression.</p>
+      </div>
+      <div class="ap-process-step">
+        <span class="step-tag">Date confirmée</span>
+        <div class="step-n">03</div>
+        <h3>Chantier</h3>
+        <p>On valide une date ensemble, je m'engage dessus. Préparation soignée des supports, mises en peinture, finitions — dans cet ordre, sans raccourci.</p>
+      </div>
+      <div class="ap-process-step">
+        <span class="step-tag">Réception</span>
+        <div class="step-n">04</div>
+        <h3>Tour ensemble</h3>
+        <p>On fait le tour des pièces ensemble. Retouches à chaud si besoin, conseils d'entretien. Et on garde le contact pour la suite.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CITATION ============ -->
+<section class="ap-quote" data-screen-label="06 Citation">
+  <div class="container">
+    <span class="eyebrow no-rule">Une conviction</span>
+    <blockquote>
+      Un beau mur, c'est <span class="italic">90% de préparation</span> et 10% de peinture. <span class="muted">Le reste, c'est l'œil.</span>
+    </blockquote>
+    <div class="sig">— Joey, JS Peinture</div>
+  </div>
+</section>
+
+<!-- ============ MARQUES ============ -->
+<section class="ap-brands" data-screen-label="07 Marques">
+  <div class="container">
+    <div class="ap-brands-head">
+      <span class="eyebrow no-rule">Les marques avec lesquelles je travaille</span>
+      <h2>Des produits<br /><span class="italic">de confiance</span>.</h2>
+    </div>
+    <div class="ap-brands-pills">
+      <span class="ap-brands-pill">Tollens</span>
+      <span class="ap-brands-pill">Seigneurie</span>
+      <span class="ap-brands-pill">Zolpan</span>
+      <span class="ap-brands-pill">Farrow &amp; Ball</span>
+      <span class="ap-brands-pill">Levis</span>
+      <span class="ap-brands-pill">Tassili</span>
+      <span class="ap-brands-pill">Onip</span>
+    </div>
+    <p class="ap-brands-foot">Peintures professionnelles, choisies pour leur tenue, leur opacité et leurs émissions faibles (label A+). Vous pouvez aussi me fournir vos propres pots — pas de souci.</p>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="contact-band" data-screen-label="08 Contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div>
+        <span class="eyebrow">On en parle ?</span>
+        <h2 style="margin-top: 24px;">Racontez-moi<br /><span class="italic">votre projet</span>.</h2>
+        <p class="lead" style="margin-top: 24px;">Un appel, un mail, un message — ce qui vous arrange. Je réponds sous 24h ouvrées et je me déplace gratuitement pour le devis.</p>
+      </div>
+      <div class="contact-info">
+        <div class="row"><b>Téléphone</b><span><a href="tel:+33645263850">06.45.26.38.50</a></span></div>
+        <div class="row"><b>Email</b><span><a href="mailto:jspeinture51@gmail.com">jspeinture51@gmail.com</a></span></div>
+        <div class="row"><b>Horaires</b><span>Lun – Sam · 8h–18h</span></div>
+        <div style="display:flex; gap:14px; margin-top: 12px; flex-wrap: wrap;">
+          <a class="btn btn--accent" href="contact.html">Formulaire de devis <span class="arrow">→</span></a>
+          <a class="btn btn--ghost" href="realisations.html">Voir mes réalisations</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="footer-brand"><img src="assets/logo/js-logo.png" alt="JS Peinture" /><span class="footer-brand-text">JS peinture<b>.</b></span></div>
+        <p class="footer-blurb">Artisan peintre en bâtiment à Crugny. Peinture intérieure, enduisage, ratissage, revêtements muraux dans la Marne et l'Aisne depuis 2019.</p>
+      </div>
+      <div class="footer-col"><h5>Navigation</h5>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="a-propos.html">À propos</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="realisations.html">Réalisations</a></li>
+          <li><a href="blog.html">Journal</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col"><h5>Contact</h5>
+        <ul>
+          <li><a href="tel:+33645263850">06.45.26.38.50</a></li>
+          <li><a href="mailto:jspeinture51@gmail.com">jspeinture51@gmail.com</a></li>
+          <li>Crugny, 51170</li>
+          <li>Lun – Sam · 8h–18h</li>
+        </ul>
+      </div>
+      <div class="footer-col"><h5>Zones d'intervention</h5>
+        <div class="zones">
+          <span>Crugny</span><span>Fismes</span><span>Jonchery</span><span>Muizon</span><span>Reims</span><span>Soissons</span><span>Braine</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bot">
+      <div>© 2026 JS Peinture — Tous droits réservés.</div>
+      <div>Peintre en bâtiment · Marne (51) &amp; Aisne (02)</div>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/main.js"></script>
+<script>
+  // Process bar fill animation when grid in view
+  (function() {
+    const grid = document.querySelector('.ap-process-grid');
+    if (!grid) return;
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          grid.classList.add('in-view');
+          io.unobserve(grid);
+        }
+      });
+    }, { threshold: 0.3 });
+    io.observe(grid);
+  })();
+</script>
+</body>
+</html>
