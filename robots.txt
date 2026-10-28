@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://jspeinture51.fr/sitemap.xml

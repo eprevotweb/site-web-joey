@@ -1,0 +1,21 @@
+# Anciennes adresses WordPress -> nouvelles pages (garde le référencement Google)
+/qui-suis-je        /a-propos.html      301!
+/a-propos           /a-propos.html      301!
+/projet             /services.html      301!
+/services           /services.html      301!
+/mes-services       /realisations.html  301!
+/mes-realisations   /realisations.html  301!
+/realisations       /realisations.html  301!
+/contact            /contact.html       301!
+/blog               /blog.html          301!
+/actualites         /blog.html          301!
+/elementor-155      /blog.html          301!
+/blog/:slug         /:slug.html         301!
+/faq                /                   301!
+/elementor-108      /                   301!
+/accueil            /                   301!
+/hello-world        /                   301!
+/feed               /                   301!
+/wp-login.php       /                   301!
+/wp-admin/*         /                   301!
+/wp-content/*       /                   301!
